@@ -12,6 +12,7 @@
 #
 
 DEMO_CREATE_STAFF_USER: true
+WORKER_USERS_HASHED_PASSWORD: hamilton
 
 demo_app_dir: "{{ COMMON_APP_DIR }}/demo"
 demo_code_dir: "{{ demo_app_dir }}/edx-demo-course"
@@ -46,3 +47,11 @@ demo_edxapp_settings: '{{ COMMON_EDXAPP_SETTINGS }}'
 demo_edxapp_venv_bin: '{{ COMMON_APP_DIR }}/{{ demo_edxapp_user }}/venvs/{{demo_edxapp_user}}/bin'
 demo_edxapp_course_data_dir: '{{ COMMON_DATA_DIR }}/{{ demo_edxapp_user }}/data'
 demo_edxapp_code_dir: '{{ COMMON_APP_DIR }}/{{ demo_edxapp_user }}/edx-platform'
+
+# Add default service worker users
+SERVICE_WORKER_USERS:
+  - email: 'enterprise_worker@example.com'
+    username: enterprise_worker
+    is_staff: true
+    is_superuser: false
+    hashed_password: "{{ WORKER_USERS_HASHED_PASSWORD | hash('md5') }}"

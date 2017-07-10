@@ -223,3 +223,6 @@ COMMON_JWT_SECRET_KEY: 'SET-ME-PLEASE'
 
 # Set sandbox admin default
 SANDBOX_CREATE_ADMIN_USER: True
+
+# Set worker user default
+CREATE_SERVICE_WORKER_USERS: True
