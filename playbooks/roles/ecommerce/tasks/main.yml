@@ -170,6 +170,29 @@
     - install
     - install:configuration
 
+- name: Create Apple Pay certificates directory
+  file:
+    path: "{{ ecommerce_apple_pay_merchant_certificate_directory }}"
+    state: directory
+    owner: "{{ supervisor_user }}"
+    group: "{{ common_web_user }}"
+  tags:
+    - install
+    - install:configuration
+
+- name: Write Apple Pay merchant certificates
+  copy:
+    content: "{{ item.value }}"
+    dest: "{{ ecommerce_apple_pay_merchant_certificate_directory }}/{{ item.key }}.pem"
+    owner: "{{ supervisor_user }}"
+    group: "{{ common_web_user }}"
+    mode: "0644"
+  no_log: true
+  with_dict: "{{ ECOMMERCE_APPLE_PAY_MERCHANT_CERTIFICATES }}"
+  tags:
+    - install
+    - install:configuration
+
 - name: Setup the ecommence env file
   template:
     src: "./{{ ecommerce_home }}/{{ ecommerce_service_name }}_env.j2"
